@@ -1,6 +1,6 @@
-# file-upload
+# file-transfer
 
-> a file uploader~
+> a file transfer~
 
 #### Build Setup
 
