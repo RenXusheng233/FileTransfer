@@ -37,6 +37,8 @@ function createWindow() {
     useContentSize: true,
   })
 
+  console.log(mainWindow.webContents.id) // 1
+
   mainWindow.loadURL(winURL)
 
   // Open dev tools initially when in development mode
@@ -73,9 +75,9 @@ app.on('ready', () => {
       show: false,
     })
 
-    folderSelectionWindow.loadURL(folderSelectionURL)
+    console.log(folderSelectionWindow.webContents.id) // 3
 
-    console.log(myStore.getFolders())
+    folderSelectionWindow.loadURL(folderSelectionURL)
 
     folderSelectionWindow.once('ready-to-show', () => {
       folderSelectionWindow.show()
@@ -87,7 +89,7 @@ app.on('ready', () => {
     event.sender.send('stored-folder', myStore.getFolders())
   })
 
-  // 处理渲染进程请求 [弹出选择文件夹dialog]
+  // 处理请求 [弹出选择文件夹dialog]
   ipcMain.on('select-permission-folder', (event) => {
     dialog.showOpenDialog(
       {
@@ -100,14 +102,13 @@ app.on('ready', () => {
       },
       (folders) => {
         if (folders) {
-          // event.sender === ipcMain
           event.sender.send('selected-folder', folders)
         }
       }
     )
   })
 
-  // 将子进程传回的路径信息保存到本地文件中
+  // 处理传回的路径信息保存至本地文件中
   ipcMain.on('save-permission-folder', (event, folders) => {
     // 存储至本地文件
     myStore.addFolders(folders)

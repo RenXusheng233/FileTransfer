@@ -5,7 +5,7 @@
     <ice-split-panes slot="bottom" horizontal max-size="90%" initial-size="90%">
       <ice-split-panes slot="top">
         <ice-split-panes slot="left" horizontal>
-          <div slot="top" class="content color-b">本地路径</div>
+          <div slot="top" class="content color-b">{{ this.pathsInfoTree }}</div>
           <div slot="bottom" class="content color-c">路径详情</div>
         </ice-split-panes>
 
@@ -26,7 +26,20 @@ export default {
   name: 'landingPage',
   components: { iceSplitPanes },
   data() {
-    return {}
+    return {
+      pathsInfoTree: [],
+    }
+  },
+  created() {
+    this.requestPathsInfo()
+  },
+  methods: {
+    // 请求路径信息
+    requestPathsInfo() {
+      this.$electron.ipcRenderer.on('folder-info', (event, paths) => {
+        this.pathsInfoTree = paths
+      })
+    },
   },
 }
 </script>

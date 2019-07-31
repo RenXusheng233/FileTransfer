@@ -32,6 +32,7 @@ const remote = require('electron').remote
 export default {
   data() {
     return {
+      mainWindowId: 0,
       permissionFolders: [], // 选中的路径
     }
   },
@@ -105,6 +106,15 @@ export default {
         // 到主进程将选择的目录保存到本地
         this.$electron.ipcRenderer.send(
           'save-permission-folder',
+          this.permissionFolders
+        )
+
+        // 渲染进程之间通信 ipcRenderer.sendTo()
+        // 第一个参数为webContentsId
+        // 可以在主进程中获得 landingPage 的 id
+        this.$electron.ipcRenderer.sendTo(
+          1,
+          'folder-info',
           this.permissionFolders
         )
 
