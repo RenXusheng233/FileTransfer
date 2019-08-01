@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="local-path-wrapper">
     <el-input placeholder="输入关键字进行过滤" v-model="filterText"></el-input>
 
     <el-tree
@@ -65,3 +65,7 @@ export default {
   },
 }
 </script>
+
+<style lang="less" scoped>
+
+</style>
