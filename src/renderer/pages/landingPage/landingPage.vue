@@ -9,7 +9,10 @@
           <div slot="top" class="local-path">
             <local-path :paths-info-tree="pathsInfoTree"></local-path>
           </div>
-          <div slot="bottom" class="content color-c">本地路径详情</div>
+          <!-- 本地路径详情模块 -->
+          <div slot="bottom" class="local-path-detail">
+            <local-path-detail></local-path-detail>
+          </div>
         </ice-split-panes>
 
         <ice-split-panes slot="right" horizontal>
@@ -28,10 +31,11 @@ const fs = require('fs')
 const path = require('path')
 
 import iceSplitPanes from 'icefox/lib/components/SplitPanes'
-import localPath from '../../components/localPath'
+import localPath from './modules/localPath'
+import localPathDetail from './modules/localPathDetail'
 export default {
   name: 'landingPage',
-  components: { iceSplitPanes, localPath },
+  components: { iceSplitPanes, localPath, localPathDetail },
   data() {
     return {
       pathsInfoTree: [], // 路径信息🌲
@@ -101,9 +105,6 @@ export default {
 
   .color-a {
     background-color: #08979c;
-  }
-  .color-c {
-    background-color: #52c41a;
   }
   .color-d {
     background-color: #1d39c4;
