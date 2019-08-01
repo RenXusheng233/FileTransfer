@@ -45,7 +45,8 @@ export default {
     requestPathsInfo() {
       this.$electron.ipcRenderer.on('folder-info', (event, paths) => {
         paths.forEach((item) => {
-          this.ergodicFile(item)
+          const resultTree = this.ergodicFile(item)
+          this.pathsInfoTree.push(resultTree)
         })
       })
     },
@@ -71,14 +72,14 @@ export default {
                 if (isDir) {
                   let oFile = { path: filedir }
                   oPath.children.push(oFile)
-                  this.ergodicFile(oFile)
+                  this.ergodicFile(oFile) // 递归
                 }
               }
             })
           })
-          this.pathsInfoTree.push(oPath)
         }
       })
+      return oPath
     },
   },
 }
