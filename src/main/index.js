@@ -37,7 +37,7 @@ function createWindow() {
     useContentSize: true,
   })
 
-  console.log(mainWindow.webContents.id) // 1
+  // console.log(mainWindow.webContents.id) // 1
 
   mainWindow.loadURL(winURL)
 
@@ -75,7 +75,7 @@ app.on('ready', () => {
       show: false,
     })
 
-    console.log(folderSelectionWindow.webContents.id) // 3
+    // console.log(folderSelectionWindow.webContents.id) // 3
 
     folderSelectionWindow.loadURL(folderSelectionURL)
 
