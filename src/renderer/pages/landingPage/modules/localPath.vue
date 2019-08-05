@@ -60,12 +60,14 @@ export default {
 
     // 点击节点事件
     handleNodeClick(data) {
-      console.log(data)
+      const localPath = data.path
+      // 提交本地路径到 vuex
+      // mutation, 不直接改变状态 异步
+      this.$store.dispatch('sendLocalPath', localPath)
     },
   },
 }
 </script>
 
 <style lang="less" scoped>
-
 </style>

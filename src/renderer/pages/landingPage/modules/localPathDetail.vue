@@ -1,40 +1,41 @@
 <template>
   <div class="local-path-detail-wrapper">
-    <el-table :data="tableData" stripe style="width: 100%">
-      <el-table-column prop="date" label="日期" width="180"></el-table-column>
-      <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-      <el-table-column prop="address" label="地址"></el-table-column>
+    <el-table :data="detailTable" stripe style="width: 100%">
+      <el-table-column align="center" prop="fileName" label="文件名"></el-table-column>
+      <el-table-column align="center" prop="fileSize" label="文件大小"></el-table-column>
+      <el-table-column align="center" prop="fileType" label="文件类型"></el-table-column>
+      <el-table-column align="center" prop="modifyTime" label="修改时间"></el-table-column>
     </el-table>
+    <div>local path is {{localPath}}</div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      tableData: [
+      detailTable: [
         {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
+          fileName: 'hello',
+          fileSize: '1kb',
+          fileType: 'txt',
+          modifyTime: 'xxx.xxx',
         },
         {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄',
-        },
-        {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄',
-        },
-        {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄',
+          fileName: 'world',
+          fileSize: '2kb',
+          fileType: 'txt',
+          modifyTime: 'ccc.ccc',
         },
       ],
     }
+  },
+  computed: {
+    // vuex 中获取选中的本地路径
+    ...mapState({
+      localPath: (state) => state.localPath,
+    }),
   },
 }
 </script>
