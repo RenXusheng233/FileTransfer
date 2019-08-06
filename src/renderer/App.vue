@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: 'file-upload'
+    name: 'file-transfer'
   }
 </script>
 
