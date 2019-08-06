@@ -6,12 +6,13 @@
       <el-table-column align="center" prop="fileType" label="文件类型"></el-table-column>
       <el-table-column align="center" prop="modifyTime" label="修改时间"></el-table-column>
     </el-table>
-    <div>local path is {{localPath}}</div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import fs from 'fs'
+import path from 'path'
 export default {
   data() {
     return {
@@ -36,6 +37,43 @@ export default {
     ...mapState({
       localPath: (state) => state.Path.localPath,
     }),
+  },
+  watch: {
+    localPath() {
+      this.ergodicFile(this.localPath)
+    },
+  },
+  methods: {
+    // 根据路径遍历
+    ergodicFile(localPath) {
+      fs.readdir(localPath, (err, files) => {
+        if (err) {
+          console.warn(err)
+        } else {
+          files.forEach((filename) => {
+            let filedir = path.join(localPath, filename)
+            fs.stat(filedir, (err, stats) => {
+              if (err) {
+                console.warn(err)
+              } else {
+                let isDerectory = stats.isDirectory() // 是文件夹
+                let isFile = stats.isFile() // 是文件
+
+                // 如果是文件夹, 则获取该文件夹名, 文件夹大小, 修改时间
+                if (isDerectory) {
+                  console.log('Folder =====', filedir)
+                }
+
+                // 如果是文件, 则需获取文件名, 文件大小, 文件类型, 修改时间
+                if (isFile) {
+                  console.log('File *****', filedir)
+                }
+              }
+            })
+          })
+        }
+      })
+    },
   },
 }
 </script>

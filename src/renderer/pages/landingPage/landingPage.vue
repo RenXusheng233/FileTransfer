@@ -64,7 +64,7 @@ export default {
           console.warn(err)
         } else {
           // 遍历读取到的文件列表
-          files.forEach((filename, index) => {
+          files.forEach((filename) => {
             // 获取当前文件的绝对路径
             let filedir = path.join(filePath, filename)
             // 根据文件路径获取文件信息，返回一个 fs.Stats 对象
