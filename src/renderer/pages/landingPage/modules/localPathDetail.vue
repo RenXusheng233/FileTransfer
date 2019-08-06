@@ -32,9 +32,9 @@ export default {
     }
   },
   computed: {
-    // vuex 中获取选中的本地路径
+    // vuex 中获取选中的本地路径 [Path模块]
     ...mapState({
-      localPath: (state) => state.localPath,
+      localPath: (state) => state.Path.localPath,
     }),
   },
 }

@@ -1,5 +1,5 @@
 const state = {
-  localPath: 'bendi',
+  localPath: '',
 }
 
 const mutations = {
