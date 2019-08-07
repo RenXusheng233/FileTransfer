@@ -70,4 +70,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.local-path-wrapper {
+  margin-top: 10px;
+  .el-input {
+    width: 80%;
+    padding: 5px 0 10px 10px;
+    
+  }
+}
 </style>
