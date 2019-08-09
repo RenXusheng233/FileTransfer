@@ -1,6 +1,8 @@
 <template>
   <ice-split-panes class="landing-page-wrapper" horizontal min-size="10%" initial-size="10%">
-    <div slot="top" class="content color-a">连接服务器</div>
+    <div slot="top" class="connect-service">
+      <connect-service></connect-service>
+    </div>
 
     <ice-split-panes slot="bottom" horizontal max-size="90%" initial-size="90%">
       <ice-split-panes slot="top">
@@ -31,11 +33,13 @@ const fs = require('fs')
 const path = require('path')
 
 import iceSplitPanes from 'icefox/lib/components/SplitPanes'
+
 import localPath from './modules/localPath'
 import localPathDetail from './modules/localPathDetail'
+import connectService from './modules/connectService'
 export default {
   name: 'landingPage',
-  components: { iceSplitPanes, localPath, localPathDetail },
+  components: { iceSplitPanes, localPath, localPathDetail, connectService },
   data() {
     return {
       pathsInfoTree: [], // 路径信息🌲
@@ -103,9 +107,6 @@ export default {
     font-size: 24px;
   }
 
-  .color-a {
-    background-color: #08979c;
-  }
   .color-d {
     background-color: #1d39c4;
   }
