@@ -113,6 +113,11 @@ app.on('ready', () => {
     // 存储至本地文件
     myStore.addFolders(folders)
   })
+
+  // 处理传回的参数连接远程服务器
+  ipcMain.on('remote-service-params', (event, params) => {
+    console.log(params)
+  })
 })
 
 app.on('window-all-closed', () => {
