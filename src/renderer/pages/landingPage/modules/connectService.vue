@@ -8,7 +8,7 @@
         <el-input size="mini" v-model="serviceParams.username"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input size="mini" v-model="serviceParams.password"></el-input>
+        <el-input type="password" size="mini" v-model="serviceParams.password"></el-input>
       </el-form-item>
       <el-form-item label="端口" prop="port">
         <el-input size="mini" v-model="serviceParams.port"></el-input>
@@ -36,7 +36,10 @@ export default {
   methods: {
     connectToService() {
       // 将所填的参数传递到主进程中处理
-      this.$electron.ipcRenderer.send('remote-service-params', this.serviceParams)
+      this.$electron.ipcRenderer.send(
+        'remote-service-params',
+        this.serviceParams
+      )
     },
   },
 }

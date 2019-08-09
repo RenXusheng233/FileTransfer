@@ -1,5 +1,6 @@
 import { app, BrowserWindow, dialog, ipcMain } from 'electron'
 import DataStore from './utils/fetchFolderPaths'
+import Client from './utils/connectRemoteService'
 
 // 初始值: 文件名
 const myStore = new DataStore({ name: 'Folder Data' })
@@ -116,7 +117,7 @@ app.on('ready', () => {
 
   // 处理传回的参数连接远程服务器
   ipcMain.on('remote-service-params', (event, params) => {
-    console.log(params)
+    Client.connect(params)
   })
 })
 
