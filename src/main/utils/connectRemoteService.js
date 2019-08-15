@@ -1,37 +1,18 @@
 const Client = require('ssh2').Client
 
-const client = new Client()
+const conn = new Client()
 
-client.on('ready', () => {
-  console.log('ssh已连接!')
-  client.shell((err, stream) => {
+conn.on('ready', () => {
+  console.log('Client :: ready')
+  // 首先需要获取远程服务器所有的文件
+  conn.sftp((err, sftp) => {
     if (err) throw err
-    process.stdin.setEncoding('utf8')
-    let command = false
-    process.stdin.on('readable', () => {
-      const chunk = process.stdin.read()
-      if (chunk !== null) {
-        command = true
-        stream.write(chunk)
-      }
+    sftp.readdir('/', (err, list) => {
+      if (err) throw err
+      console.dir(list)
+      conn.end()
     })
-
-    stream
-      .on('close', function() {
-        console.log('关闭shell')
-        client.end()
-      })
-      .on('data', function(data) {
-        if (!command) process.stdout.write(data)
-        command = false
-      })
-      .on('error', function(data) {
-        console.log('err: ' + data)
-      })
-      .stderr.on('data', function(data) {
-        console.log('STDERR: ' + data)
-      })
   })
 })
 
-export default client
+export default conn

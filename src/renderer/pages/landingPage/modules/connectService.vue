@@ -29,7 +29,7 @@ export default {
         host: '', // 主机
         username: '', // 用户名
         password: '', // 密码
-        port: '', // 端口
+        port: '22', // 端口 - 默认为22
       },
     }
   },
@@ -52,7 +52,7 @@ export default {
     display: flex;
 
     .el-input {
-      width: 60%;
+      width: 65%;
     }
   }
 }
